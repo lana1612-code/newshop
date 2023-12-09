@@ -2,7 +2,6 @@ import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import {useQuery} from 'react-query';
 import axios from 'axios';
-import ReactImageMagnify from 'react-image-magnify';
 
 export default function CatogoryDetail() {
      const {catogoryID} = useParams();
@@ -29,18 +28,8 @@ export default function CatogoryDetail() {
                <div class= 'row  p-5 mb-4 border '>
                 <h2>{product.name}</h2>
                 <div class='w-50 mt-3 '>
-                <ReactImageMagnify {...{
-    smallImage: {
-        alt: 'Wristwatch by Ted Baker London',
-        isFluidWidth: true,
-        src: product.mainImage.secure_url
-    },
-    largeImage: {
-        src: product.mainImage.secure_url,
-        width: 1500,
-        height: 2000
-    }
-}} />
+                  <img src={product.mainImage.secure_url } />
+                
             
             </div>
             </div>
