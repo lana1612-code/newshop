@@ -9,6 +9,8 @@ export const CartContext = createContext(null);
 
 export function CartContextProvider ({children}){
     let [count,setCount] = useState(0);
+    let [loading,isLoading] = useState(true);
+
   
   const getCartContext = async ()=>{
     try{
@@ -79,8 +81,61 @@ export function CartContextProvider ({children}){
      }
   }
 
+  const clearCartContext = async ()=>{
+    try{
+        const token = localStorage.getItem('userToken');
+        console.log(token);
+        console.log("1");
 
-    return <CartContext.Provider value = {{addToCartContext,getCartContext,removeCartContext,count}}>
+         await axios.patch(`https://ecommerce-node4.vercel.app/cart/clear`
+         ,null ,{headers:{Authorization:`Tariq__${token}`}},
+         );
+         toast.success('clear cart  success', {
+            position: "bottom-center",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
+            isLoading(false)
+          console.log("data1");
+          
+
+       
+     }
+     catch(err){
+         console.log(err);
+     }
+  }
+  const increase = async (productId)=>{
+    try{
+        const token = localStorage.getItem('userToken');
+        await axios.patch(`https://ecommerce-node4.vercel.app/cart/incraseQuantity`
+        ,{productId} ,{headers:{Authorization:`Tariq__${token}`}}
+         );
+        
+     }
+     catch(err){
+         console.log(err);
+     }
+  }
+  const decrease= async (productId)=>{
+    try{
+        const token = localStorage.getItem('userToken');
+        await axios.patch(`https://ecommerce-node4.vercel.app/cart/decraseQuantity`
+        ,{productId} ,{headers:{Authorization:`Tariq__${token}`}}
+         );
+        
+     }
+     catch(err){
+         console.log(err);
+     }
+  }
+
+    return <CartContext.Provider value = {{addToCartContext,decrease,increase,loading,getCartContext,removeCartContext,clearCartContext,count}}>
     {children}
     </CartContext.Provider>
 }

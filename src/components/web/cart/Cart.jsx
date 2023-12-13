@@ -4,9 +4,10 @@ import { useContext } from 'react'
 import { CartContext } from '../../context/Context'
 import { useQuery } from 'react-query';
 import { useState } from 'react';
+import { useEffect } from 'react';
 export default function Cart() {
 
-    const {getCartContext,removeCartContext} =useContext(CartContext);
+    const {getCartContext,decrease,increase,removeCartContext,clearCartContext} =useContext(CartContext);
      
 
     const getCart = async()=>{
@@ -21,12 +22,21 @@ export default function Cart() {
         console.log(res);
         return res;
     }
-
+    const clearCart = async()=>{
+       await clearCartContext();
+      
+  }
+  const increaseQ = async(productId)=>{
+    await increase(productId);
+  }
+  const decreaseQ = async(productId)=>{
+    await decrease(productId);
+  }
    const {data,isLoading} = useQuery("getCart",getCart);
    
 
 
-   if(isLoading){
+   if(isLoading ){
     return <p>pls waite ... </p>
    }
 
@@ -34,6 +44,7 @@ export default function Cart() {
     <div className="cart">
       <div className="container">
         <div className="row">
+          
           <div className="cart-items">
             <div className="products" id="products">
               <div className="item">
@@ -49,6 +60,7 @@ export default function Cart() {
                 <div className="subtotal">
                   <h2>Subtotal</h2>
                 </div>
+                
               </div>
        
                {data?.products?(data?.products.map(
@@ -79,7 +91,7 @@ export default function Cart() {
                   </div>
                 </div>
                 <div className="quantity">
-                  <button>
+                  <button onClick={()=>decreaseQ(product.details._id)}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width={16}
@@ -96,8 +108,10 @@ export default function Cart() {
                       />
                     </svg>
                   </button>
+
                   <span>{product.quantity}</span>
-                  <button>
+
+                  <button  onClick={()=>increaseQ(product.details._id)}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width={16}
@@ -121,12 +135,11 @@ export default function Cart() {
                )):"no product found"}
 
 
-             
+           <button className='btn btn-info mx-5' onClick={clearCart}> clear</button>
 
               
             </div>
-
-
+           
             <div className="cart-summary">
               <h2>Cart summary</h2>
               <div className="summery-items">

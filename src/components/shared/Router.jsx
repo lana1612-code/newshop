@@ -15,6 +15,9 @@ import ForgetPassword from '../web/forgetpassword/ForgetPassword.jsx';
 import ProtectRouter from './ProtectRouter.jsx';
 import Profile from '../web/profile/Profile.jsx';
 import Auth from './Auth.jsx';
+import UserContact from '../web/profile/UserContact.jsx';
+import UserInfo from '../web/profile/UserInfo.jsx';
+import UserOrder from '../web/profile/UserOrder.jsx';
 
  export const  Route= createBrowserRouter([
     {
@@ -32,7 +35,22 @@ import Auth from './Auth.jsx';
         element:<Register/>
       },{
         path:'profile',
-        element:<Profile/>
+        element:
+        <ProtectRouter>
+        <Profile/>
+        </ProtectRouter>
+        ,
+        children:[
+          {path:'info',
+          element: <UserInfo />
+          },
+          {path:'contact',
+          element: <UserContact />
+          },
+          {path:'order',
+          element: <UserOrder />
+          }
+        ]
       },{
         path:'cart',
         element:

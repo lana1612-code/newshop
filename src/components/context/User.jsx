@@ -8,6 +8,8 @@ export default function UserContextProvider ({children}){
 
     const [userToken, setUserToken] = useState(null);
     const [userData, setUserData] = useState(null);
+    const [Loading, setLoading] = useState(true);
+
 
     const getUserData = async ()=>{ 
         if(userToken){
@@ -18,6 +20,7 @@ export default function UserContextProvider ({children}){
             console.log(data.user);
 
             setUserData(data.user);
+            setLoading(false);
         }
     }
 
@@ -28,7 +31,7 @@ export default function UserContextProvider ({children}){
     );
     
  
-    return <UserContext.Provider value={{userToken,setUserToken ,userData, setUserData}}> 
+    return <UserContext.Provider value={{userToken,setUserToken ,userData, setUserData ,Loading}}> 
         {children}
     </UserContext.Provider>
 }   

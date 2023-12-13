@@ -28,7 +28,7 @@ const logout=()=>{
     });
 }
 const {count} = useContext(CartContext);
-const {getCartContext} =useContext(CartContext);
+const {getCartContext,removeCartContext} =useContext(CartContext);
 
 
   return (
