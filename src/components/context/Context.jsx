@@ -10,6 +10,8 @@ export const CartContext = createContext(null);
 export function CartContextProvider ({children}){
     let [count,setCount] = useState(0);
     let [loading,isLoading] = useState(true);
+    let [loadingOrder,isLoadingOrder] = useState(true);
+
 
   
   const getCartContext = async ()=>{
@@ -134,8 +136,23 @@ export function CartContextProvider ({children}){
          console.log(err);
      }
   }
+  const getOrder = async ()=>{
+    try{
+        const token = localStorage.getItem('userToken');
+        await axios.get(`https://ecommerce-node4.vercel.app/order`
+      ,{headers:{Authorization:`Tariq__${token}`}}
+         );
+         console.log(token);
+         isLoadingOrder(false);
+        
+     }
+     catch(err){
+         console.log(err);
+     }
+  }
+  
 
-    return <CartContext.Provider value = {{addToCartContext,decrease,increase,loading,getCartContext,removeCartContext,clearCartContext,count}}>
+    return <CartContext.Provider value = {{addToCartContext,loadingOrder,getOrder,decrease,increase,loading,getCartContext,removeCartContext,clearCartContext,count}}>
     {children}
     </CartContext.Provider>
 }

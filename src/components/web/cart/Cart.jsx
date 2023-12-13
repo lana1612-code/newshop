@@ -175,6 +175,7 @@ export default function Cart() {
               </div>
             </div>
           </div>
+          
           <div className="row">
             <h2>Have a coupon ?</h2>
             <p>Add your code for an instant cart discount</p>

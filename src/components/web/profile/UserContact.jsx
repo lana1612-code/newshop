@@ -3,7 +3,7 @@ import { UserContext } from '../../context/User';
 
 export default function UserContact() {
   const {userData ,Loading} = useContext(UserContext);
-
+console.log(userData);
   return (
     <div className='contact  mt-5 pt-5'>
     <h3> email  :  {userData.email} </h3>

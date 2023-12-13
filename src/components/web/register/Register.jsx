@@ -11,7 +11,10 @@ export default function Register() {
       userName:'',
       email:'',
       password:'',
-      image:''
+      image:'',
+      phone:'',
+      address:''
+
      }
 
      const onSubmit= async user=>{
@@ -21,6 +24,9 @@ export default function Register() {
       formData.append('email', user.email);
       formData.append('password', user.password);
       formData.append('image', user.image);
+      formData.append('phone', user.phone);
+      formData.append('address', user.address);
+
       const {data} = await axios.post(`https://ecommerce-node4.vercel.app/auth/signup`,formData);
       if(data.message='success'){
          toast.success('create acounte success , check your email', {
@@ -81,7 +87,23 @@ export default function Register() {
         onChange:handelData,
         
 
-     }
+     },{
+      id:'phone',
+      name:'phone',
+      type:'text',
+      title:'user phone',
+      value:formik.values.phone,
+      
+
+   },{
+      id:'address',
+      name:'address',
+      type:'text',
+      title:'user address',
+      value:formik.values.address,
+      
+
+   }
     ];
 
     const inputs = input.map(
