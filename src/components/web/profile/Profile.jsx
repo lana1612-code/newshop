@@ -4,6 +4,7 @@ import  './ProfileStyel.css'
 import { Link, Outlet } from 'react-router-dom';
 export default function Profile() {
   const {userData ,Loading} = useContext(UserContext);
+  
  if(Loading)
  {
   return <div>loading</div>

@@ -9,6 +9,11 @@ export default function UserContextProvider ({children}){
     const [userToken, setUserToken] = useState(null);
     const [userData, setUserData] = useState(null);
     const [Loading, setLoading] = useState(true);
+    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState('');
+    
+
+
 
 
     const getUserData = async ()=>{ 
@@ -31,7 +36,7 @@ export default function UserContextProvider ({children}){
     );
     
  
-    return <UserContext.Provider value={{userToken,setUserToken ,userData, setUserData ,Loading}}> 
+    return <UserContext.Provider value={{address,setAddress,phone, setPhone,userToken,setUserToken ,userData, setUserData ,Loading}}> 
         {children}
     </UserContext.Provider>
 }   

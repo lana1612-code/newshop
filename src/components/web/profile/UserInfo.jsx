@@ -8,9 +8,9 @@ export default function UserInfo() {
   return (
    <>
     <div className='infoUser mt-5 pt-5'>
-    <h3>user name  :  {userData.userName}</h3>
+    <h3>user name  :  {userData?.userName}</h3>
   <div className='w-50'>
-  <img src={userData.image.secure_url} className='w-50' alt="Profile"/>
+  <img src={userData?.image.secure_url} className='w-50' alt="Profile"/>
   </div>
   </div>
    </>

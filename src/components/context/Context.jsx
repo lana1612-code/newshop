@@ -11,7 +11,7 @@ export function CartContextProvider ({children}){
     let [count,setCount] = useState(0);
     let [loading,isLoading] = useState(true);
     let [loadingOrder,isLoadingOrder] = useState(true);
-
+    const [Total, setTotal] = useState(1);
 
   
   const getCartContext = async ()=>{
@@ -22,12 +22,14 @@ export function CartContextProvider ({children}){
         );
         setCount(data.count);
         console.log(data.count);
+       
         return data;
     }
     catch(err){
         console.log(err);
     }
   }
+  
 
   const addToCartContext  = async (productId)=>{
 
@@ -152,7 +154,7 @@ export function CartContextProvider ({children}){
   }
   
 
-    return <CartContext.Provider value = {{addToCartContext,loadingOrder,getOrder,decrease,increase,loading,getCartContext,removeCartContext,clearCartContext,count}}>
+    return <CartContext.Provider value = {{addToCartContext,Total, setTotal,loadingOrder,getOrder,decrease,increase,loading,getCartContext,removeCartContext,clearCartContext,count}}>
     {children}
     </CartContext.Provider>
 }

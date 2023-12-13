@@ -3,11 +3,10 @@ import './Cart.css'
 import { useContext } from 'react'
 import { CartContext } from '../../context/Context'
 import { useQuery } from 'react-query';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { UserContext } from '../../context/User';
 export default function Cart() {
-
-    const {getCartContext,decrease,increase,removeCartContext,clearCartContext} =useContext(CartContext);
+  const {getCartContext,decrease,increase,removeCartContext,clearCartContext,Total, setTotal} =useContext(CartContext);
+  const {address,setAddress,phone, setPhone} = useContext(UserContext);
      
 
     const getCart = async()=>{
@@ -32,13 +31,20 @@ export default function Cart() {
   const decreaseQ = async(productId)=>{
     await decrease(productId);
   }
+  let saveParameter = ()=>{
+
+    setAddress(document.getElementById('address').value);
+    setPhone(document.getElementById('phone').value);
+    
+  }
+ 
    const {data,isLoading} = useQuery("getCart",getCart);
    
-
-
    if(isLoading ){
     return <p>pls waite ... </p>
    }
+  
+
 
   return (
     <div className="cart">
@@ -65,6 +71,7 @@ export default function Cart() {
        
                {data?.products?(data?.products.map(
                 (product)=>
+              
                 <div className="item">
                 <div className="product-info">
                   <img src={product.details.mainImage.secure_url} />
@@ -130,13 +137,14 @@ export default function Cart() {
                 </div>
                 <div className="price">{product.details.price}</div>
                 <div className="subtotal">{product.details.price *product.quantity }</div>
+                
               </div> 
 
                )):"no product found"}
 
 
            <button className='btn btn-info mx-5' onClick={clearCart}> clear</button>
-
+           
               
             </div>
            
@@ -161,18 +169,31 @@ export default function Cart() {
                   </div>
                   <span>%21.00</span>
                 </div>
+                <div className="summary-item">
+                  <div className="form-group">
+                  <label>Addres</label> <input id='address' type="text" /> 
+                  </div>
+                  
+                </div>
+                <div className="summary-item">
+                  <div className="form-group">
+                  <label>Phone</label> <input id='phone' type="text" /> 
+                  </div>
+                  
+                </div>
                 <div className="summary-footer">
                   <label>Subtotal</label>
                   <span>$1234.00</span>
                 </div>
                 <div className="summary-footer">
                   <label className="total">Total</label>
-                  <span>$1345.00</span>
+                  <span></span>
                 </div>
-                <div className="checkout">
+                <div className="checkout" onClick={saveParameter}>
                   <a href="#">Chekout</a>
                 </div>
               </div>
+
             </div>
           </div>
           
