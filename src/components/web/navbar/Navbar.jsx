@@ -6,9 +6,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { CartContext } from '../../context/Context';
 import { useQuery } from 'react-query';
 import { UserContext } from './../../context/User';
+import { useEffect } from 'react';
 
 export default function Navbar() {
   const {userToken, setUserToken,setUserData,userData} = useContext(UserContext);
+
   console.log(userToken);
   const navigate = useNavigate();
 const logout=()=>{
@@ -27,10 +29,22 @@ const logout=()=>{
     theme: "dark",
     });
 }
-const {count} = useContext(CartContext);
+const {count,setCount} = useContext(CartContext);
 const {getCartContext,removeCartContext} =useContext(CartContext);
-
-
+/* 
+let calcTotal = async()=>{
+  const response = await getCartContext();
+  let total = 0 ;
+  response?.products(
+  response.products.map(
+    (product) => {total  += product.details.price *product.details.quantity;}
+  ))
+  
+  
+  console .log(total);
+  
+}
+*/
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
     <div className="container">
@@ -56,7 +70,7 @@ const {getCartContext,removeCartContext} =useContext(CartContext);
       </li>
      {userToken?
       <li className="nav-item">
-        <Link className="nav-link" to={'/cart'}>Card [{count}]</Link>
+        <Link className="nav-link" to={'/cart'}>Card [{()=>setCount(count)}{count}]</Link>
       </li>
       : null}
      

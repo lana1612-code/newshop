@@ -37,6 +37,7 @@ export default function Cart() {
     setPhone(document.getElementById('phone').value);
     
   }
+
  
    const {data,isLoading} = useQuery("getCart",getCart);
    
@@ -44,8 +45,6 @@ export default function Cart() {
     return <p>pls waite ... </p>
    }
   
-
-
   return (
     <div className="cart">
       <div className="container">

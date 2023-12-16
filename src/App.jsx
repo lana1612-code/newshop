@@ -16,12 +16,22 @@ import CatogoryDetail from './components/web/catogories/CatogoryDetail.jsx';
 import Product from './components/web/product/Product.jsx';
 import EmailForgetPassword from './components/web/forgetpassword/EmailForgetPassword.jsx';
 import ForgetPassword from './components/web/forgetpassword/ForgetPassword.jsx';
-import { CartContextProvider } from './components/context/Context.jsx';
+import { CartContext, CartContextProvider } from './components/context/Context.jsx';
 import Cart from './components/web/cart/Cart.jsx';
-import UserContextProvider from './components/context/User.jsx';
+import UserContextProvider, { UserContext } from './components/context/User.jsx';
 import {Route} from './components/shared/Router.jsx'
+import { useContext } from 'react';
 export default function App() {
+ let {setUserToken} = useContext(UserContext);
 
+ useEffect(
+  ()=>{
+   if(localStorage.getItem('userToken') != null){
+    setUserToken(localStorage.getItem('userToken'));
+   }
+  
+  } , []
+);
 
 
   return (
