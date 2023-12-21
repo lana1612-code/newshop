@@ -29,6 +29,7 @@ const logout=()=>{
     theme: "dark",
     });
 }
+
 const {count,setCount} = useContext(CartContext);
 const {getCartContext,removeCartContext} =useContext(CartContext);
 /* 
@@ -66,11 +67,11 @@ let calcTotal = async()=>{
 
 
         <li className="nav-item">
-        <Link className="nav-link" to='/products/:productsID'>Products</Link>
+        <Link className="nav-link" to='/allProduct/:limit/:page'>Products</Link>
       </li>
      {userToken?
       <li className="nav-item">
-        <Link className="nav-link" to={'/cart'}>Card [{()=>setCount(count)}{count}]</Link>
+        <Link className="nav-link" to={'/cart'}>Card <span class= 'rounded border bg-secondary px-2 text-white'>{()=>setCount(count)}{count}</span></Link>
       </li>
       : null}
      

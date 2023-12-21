@@ -4,26 +4,35 @@ import { useContext } from 'react'
 import { CartContext } from '../../context/Context'
 import { useQuery } from 'react-query';
 import { UserContext } from '../../context/User';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 export default function Cart() {
-  const {getCartContext,decrease,increase,removeCartContext,clearCartContext,Total, setTotal} =useContext(CartContext);
-  const {address,setAddress,phone, setPhone} = useContext(UserContext);
+  const {getCartContext,loadingQ,decrease,increase,removeCartContext,clearCartContext,Total, setTotal} =useContext(CartContext);
      
 
-    const getCart = async()=>{
-        const response = await getCartContext();
-        console.log("response");
-        console.log(response);
-        return response;
-    }
+  const getCart = async()=>{
+    const response = await getCartContext();
+    console.log("response");
+    console.log(response);
+    return response;
+}
+
+  const {data,isLoading} = useQuery("getCart",getCart);
+   
+
     const removeCart = async(productId)=>{
+      
         const res = await removeCartContext(productId);
         console.log("res");
         console.log(res);
+      
+
         return res;
     }
     const clearCart = async()=>{
-       await clearCartContext();
       
+       await clearCartContext();
+       
   }
   const increaseQ = async(productId)=>{
     await increase(productId);
@@ -31,16 +40,9 @@ export default function Cart() {
   const decreaseQ = async(productId)=>{
     await decrease(productId);
   }
-  let saveParameter = ()=>{
-
-    setAddress(document.getElementById('address').value);
-    setPhone(document.getElementById('phone').value);
-    
-  }
 
  
-   const {data,isLoading} = useQuery("getCart",getCart);
-   
+ 
    if(isLoading ){
     return <p>pls waite ... </p>
    }
@@ -142,12 +144,14 @@ export default function Cart() {
                )):"no product found"}
 
 
-           <button className='btn btn-info mx-5' onClick={clearCart}> clear</button>
-           
+           <div className="text-center">
+           <button className='btn btn-info  mb-3 w-25' onClick={clearCart}> clear</button>
+           </div>
               
             </div>
            
-            <div className="cart-summary">
+            <div className="">
+              <div className="cart-summary">
               <h2>Cart summary</h2>
               <div className="summery-items">
                 <div className="summary-item">
@@ -168,31 +172,17 @@ export default function Cart() {
                   </div>
                   <span>%21.00</span>
                 </div>
-                <div className="summary-item">
-                  <div className="form-group">
-                  <label>Addres</label> <input id='address' type="text" /> 
-                  </div>
-                  
-                </div>
-                <div className="summary-item">
-                  <div className="form-group">
-                  <label>Phone</label> <input id='phone' type="text" /> 
-                  </div>
-                  
-                </div>
-                <div className="summary-footer">
-                  <label>Subtotal</label>
-                  <span>$1234.00</span>
-                </div>
+               
                 <div className="summary-footer">
                   <label className="total">Total</label>
                   <span></span>
                 </div>
-                <div className="checkout" onClick={saveParameter}>
-                  <a href="#">Chekout</a>
+                <div className="checkout" >
+                  <Link to='/createOrder'>Chekout</Link>
                 </div>
               </div>
 
+            </div>
             </div>
           </div>
           

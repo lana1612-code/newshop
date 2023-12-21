@@ -46,21 +46,27 @@ console.log(data);
       onSlideChange={() => console.log('slide change')}
       onSwiper={(swiper) => console.log(swiper)}
     >
+     
        
+    
+
       {data?.length ? data?.map(
         (catogory)=>
          <SwiperSlide key={catogory._id}>
          <Link to={`/products/category/${catogory._id}`}>
+        
          <div className='text-center'>
           
             <img src={catogory.image.secure_url} />
           </div>
+         
           </Link>
           </SwiperSlide>
       )
     :'<h2>no catogory found</h2>'}
+   
     </Swiper>
-      
+ 
    
       </div>
       

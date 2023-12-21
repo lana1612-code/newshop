@@ -19,24 +19,30 @@ export default function CatogoryDetail() {
   return (
     
     <>
+  
     <div className="container  mt-4">
       <div className='container ' >
+      <div className='row'>
         {data?.length ? data?.map(
             (product)=>
-            <div key={product._id}>
-           <Link to={`/products/${product._id}`}>
-               <div class= 'row  p-5 mb-4 border '>
-                <h2>{product.name}</h2>
-                <div class='w-50 mt-3 '>
-                  <img src={product.mainImage.secure_url } />
-                
+            <div key={product._id} className='col-lg-4'>
+           <Link className='text-decoration-none text-dark' to={`/products/${product._id}`}>
+            <div className=' mb-4 text-center'>
             
-            </div>
+                
+                
+                <div className='mb-4 border border-dark'>
+                  <img src={product.mainImage.secure_url } />
+                  </div>
+            
+                  <h6>{product.name}</h6>
+          
             </div>
             </Link>
      
              </div>
         ):<p>No Product found</p>}
+    </div>
     </div>
     </div>
     </>

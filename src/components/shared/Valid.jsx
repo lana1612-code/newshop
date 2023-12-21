@@ -19,3 +19,8 @@ export const validationSchema = yup.object(
          email:yup.string().required("the email is requierd").email(),  
       }
      );
+     export const validationSchemaOrder = yup.object(
+      {
+         phone:yup.string().required("the phone is requierd").min(9,"the least number is 9"),
+         address:yup.string().required("the address is requierd"),
+      });

@@ -10,8 +10,8 @@ export default function UserContextProvider ({children}){
     const [userToken, setUserToken] = useState(null);
     const [userData, setUserData] = useState(null);
     const [Loading, setLoading] = useState(true);
-    const [phone, setPhone] = useState('');
-    const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('5245678789');
+    const [address, setAddress] = useState('palistine');
     
 
 

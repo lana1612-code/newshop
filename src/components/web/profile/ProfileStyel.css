@@ -1,9 +1,9 @@
 .profile{
     display: flex;
     gap :50px;
-    background-color: rgb(189, 127, 247);
+    background-color: rgb(219, 182, 253);
 }
 .navClass{
-    background-color: rgb(173, 88, 252);
+    background-color: rgb(200, 146, 252);
     height:100vh;
 }

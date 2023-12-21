@@ -14,10 +14,11 @@ import EmailForgetPassword from '../web/forgetpassword/EmailForgetPassword.jsx';
 import ForgetPassword from '../web/forgetpassword/ForgetPassword.jsx';
 import ProtectRouter from './ProtectRouter.jsx';
 import Profile from '../web/profile/Profile.jsx';
-import Auth from './Auth.jsx';
 import UserContact from '../web/profile/UserContact.jsx';
 import UserInfo from '../web/profile/UserInfo.jsx';
 import UserOrder from '../web/profile/UserOrder.jsx';
+import AllProduct from '../web/product/AllProduct.jsx';
+import CreateNewOrder from '../web/order/CreateNewOrder.jsx';
 
  export const  Route= createBrowserRouter([
     {
@@ -61,6 +62,16 @@ import UserOrder from '../web/profile/UserOrder.jsx';
         path:'login',
         element:
           <Login/>
+      },{
+        path:'createOrder',
+        element:
+          <ProtectRouter>
+          <CreateNewOrder/>
+          </ProtectRouter>
+      },{
+        path:'allProduct/:limit/:page',
+        element:
+          <AllProduct/>
       },{
         path:'products/category/:catogoryID',
         element:<CatogoryDetail />
