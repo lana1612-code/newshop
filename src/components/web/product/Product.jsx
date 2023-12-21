@@ -35,9 +35,7 @@ export default function Product() {
      if(isLoading){
         return <h2> Loading </h2>;
      }
-     if(loadingR){
-      return <div > Loading</div>
-     }
+     
   return (
     
     <>
